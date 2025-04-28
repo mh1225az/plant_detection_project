@@ -1,0 +1,8 @@
+google-api-python-client
+requests
+python-dotenv
+tensorflow
+opencv-python
+numpy
+Pillow
+Flask==2.2.5
