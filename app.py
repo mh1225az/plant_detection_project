@@ -5,7 +5,7 @@ import numpy as np
 import os
 from utils.preprocessing import preprocess_image
 
-app = Flask(__name__, static_folder='static')
+app = Flask(__name__,  template_folder='templates', static_folder='static')
 
 # Load model
 model = load_model('model/model_cabai.h5')

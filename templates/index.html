@@ -2,18 +2,40 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Deteksi Penyakit Cabai</title>
+    <title>Deteksi Penyakit Tanaman Cabai</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <h1>Upload Foto Tanaman Cabai</h1>
-    <input type="file" id="fileInput">
-    <button onclick="uploadImage()">Prediksi</button>
-    <p id="result"></p>
+    <div class="container">
+        <h1>Deteksi Penyakit Tanaman Cabai</h1>
+        <input type="file" id="fileInput" accept="image/*" onchange="previewImage(event)">
+        <br>
+        <img id="preview" src="#" alt="Preview Gambar" style="display: none;" />
+        <br>
+        <button onclick="uploadImage()">Prediksi</button>
+        <p id="result"></p>
+    </div>
 
     <script>
+        function previewImage(event) {
+            const reader = new FileReader();
+            reader.onload = function(){
+                const output = document.getElementById('preview');
+                output.src = reader.result;
+                output.style.display = 'block';
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+
         function uploadImage() {
             const fileInput = document.getElementById('fileInput');
             const file = fileInput.files[0];
+
+            if (!file) {
+                alert("Silakan pilih gambar terlebih dahulu.");
+                return;
+            }
+
             const formData = new FormData();
             formData.append('file', file);
 
@@ -23,10 +45,11 @@
             })
             .then(response => response.json())
             .then(data => {
-                document.getElementById('result').innerText = 'Hasil: ' + data.penyakit;
+                document.getElementById('result').innerText = 'Hasil Deteksi: ' + data.penyakit;
             })
             .catch(error => {
                 console.error('Error:', error);
+                document.getElementById('result').innerText = 'Terjadi kesalahan dalam proses prediksi.';
             });
         }
     </script>

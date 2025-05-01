@@ -5,7 +5,7 @@ import tensorflow as tf
 from tensorflow.keras.preprocessing import image
 
 # Load model
-model = tf.keras.models.load_model('models/plant_model.h5')
+model = tf.keras.models.load_model('model/model_cabai.h5')
 class_names = sorted(os.listdir('dataset'))
 
 # Fungsi preprocessing
