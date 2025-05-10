@@ -45,13 +45,13 @@ def predict():
     # Prediksi dan ambil probabilitas tertinggi
     prediction = model.predict(img)
     predicted_class = np.argmax(prediction, axis=1)[0]
-    confidence = prediction[0][predicted_class]
+    # confidence = prediction[0][predicted_class]
 
-    # Jika confidence terlalu rendah, anggap tidak dikenali
-    if confidence < 0.8:
-        predicted_label = 'Gambar tidak dikenali / tidak ada pada dataset'
-    else:
-        predicted_label = label_map.get(predicted_class, 'Tidak Dikenal')
+    # # Jika confidence terlalu rendah, anggap tidak dikenali
+    # if confidence < 0.3:
+    #     predicted_label = 'Gambar tidak dikenali / tidak ada pada dataset'
+    # else:
+    #     predicted_label = label_map.get(predicted_class, 'Tidak Dikenal')
 
     # Hapus file setelah prediksi
     os.remove(file_path)
